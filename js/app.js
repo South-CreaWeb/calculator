@@ -1,11 +1,12 @@
 let a;
 let b;
 const operators = {
-    '+': addition(a, b),
-    '-': subtract(a, b),
-    '*': multiply(a, b),
-    '/': divide(a, b)
+    '+': function(a, b) {addition()},
+    '-': function(a, b) {subtract()},
+    '*': function(a, b) {multiply()},
+    '/': function(a, b) {divide()}
 };
+console.log(operators)
 
 /**
  * Test if the paramater is a number and Addition two numbers
@@ -72,10 +73,18 @@ function divide(a, b) {
  * @param {String} sign 
  */
 function operate (a, b, sign) {
-    for (sign in operators) {
-        console.log(sign)
+
+    for (prop in operators) {
+        if(sign === '+') {
+           return addition(a, b);
+        } else if(sign === '-'){
+           return subtract(a, b);
+        } else if(sign === '*') {
+            return multiply(a, b);
+        } else {
+            return divide(a, b);
+        }
     }
-    
 };
 
 
@@ -84,4 +93,11 @@ console.log('Subtraction: ',subtract(4, '18'));
 console.log('Multiplication: ', multiply(4, '18'));
 console.log('Division', divide(4, '18'));
 
+console.log(operate(7, 2, '+'));
 console.log(operate(7, 2, '-'));
+console.log(operate(7, 2, '*'));
+console.log(operate(7, 2, '/'));
+
+
+
+console.log(operate(2000, 7, '/'));
